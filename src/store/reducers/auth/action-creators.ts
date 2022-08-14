@@ -4,11 +4,11 @@ import {AppDispatch} from "../../index";
 import axios from "axios";
 
 export const AuthActionCreators = {
-    setUser: (user: IUser): SetUserAction => ({type: AuthActionsEnum.SET_USER, payload: user}),
-    setIsAuth: (auth: boolean): SetAuthAction => ({type: AuthActionsEnum.SET_AUTHS, payload: auth}),
-    setIsLoading: (payload: boolean): SetIsLoadingAction => ({type: AuthActionsEnum.SET_IS_LOADING, payload}),
-    setError: (payload: string): SetErrorAction => ({type: AuthActionsEnum.SET_ERROR, payload}),
-    login: (username: string, password: string) => async (dispatch: AppDispatch) => {
+    setUser:(user: IUser): SetUserAction => ({type:AuthActionsEnum.SET_USER, payload:user}),
+    setIsAuth:(auth: boolean): SetAuthAction => ({type:AuthActionsEnum.SET_AUTHS, payload:auth}),
+    setIsLoading:(payload: boolean): SetIsLoadingAction => ({type:AuthActionsEnum.SET_IS_LOADING, payload}),
+    setError:(payload: string): SetErrorAction => ({type:AuthActionsEnum.SET_ERROR, payload}),
+    login:(username: string, password: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AuthActionCreators.setIsLoading(true));
             setTimeout(async () => {
@@ -19,20 +19,20 @@ export const AuthActionCreators = {
                     localStorage.setItem('username', mockUser.username);
                     dispatch(AuthActionCreators.setIsAuth(true));
                     dispatch(AuthActionCreators.setUser(mockUser));
-                }else{
+                } else {
                     dispatch(AuthActionCreators.setError('Некорректный логин или пароль'))
                 }
                 dispatch(AuthActionCreators.setIsLoading(false));
             }, 1000)
 
-        }catch (e){
+        } catch (e) {
             dispatch(AuthActionCreators.setError('Произошла ошибка при логине'))
         }
     },
-    logout: () => async (dispatch: AppDispatch) => {
-            localStorage.removeItem('auth')
-            localStorage.removeItem('username')
-            dispatch(AuthActionCreators.setUser({} as IUser));
-            dispatch(AuthActionCreators.setIsAuth(false))
-        }
+    logout:() => async (dispatch: AppDispatch) => {
+        localStorage.removeItem('auth')
+        localStorage.removeItem('username')
+        dispatch(AuthActionCreators.setUser({} as IUser));
+        dispatch(AuthActionCreators.setIsAuth(false))
     }
+}

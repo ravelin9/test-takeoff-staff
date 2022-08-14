@@ -24,7 +24,7 @@ export const contactSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // cases for fethings contacts
+      // cases for fetch contacts
       .addCase(fetchContacts.pending, (state) => {
         state.status = 'loading';
       })
@@ -38,7 +38,7 @@ export const contactSlice = createSlice({
         state.status = 'failed';
       })
 
-      // cases for deleting a single contact
+      // cases for delete a contact
       .addCase(deleteContact.pending, (state) => {
         state.status = 'loading';
       })
@@ -54,7 +54,7 @@ export const contactSlice = createSlice({
         state.status = 'failed';
       })
 
-      // cases for addings a single contact
+      // cases for add a contact
       .addCase(addContact.pending, (state) => {
         state.status = 'loading';
       })
@@ -68,7 +68,7 @@ export const contactSlice = createSlice({
         state.status = 'failed';
       })
 
-      // cases for editing a single contact
+      // cases for edit a contact
       .addCase(editContact.pending, (state) => {
         state.status = 'loading';
       })
