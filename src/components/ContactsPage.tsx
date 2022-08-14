@@ -1,41 +1,43 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Avatar, Button, List} from "antd";
-import {CONTACTS_URL} from "../shared/constants";
+import React, {ChangeEventHandler, FC, useEffect} from 'react';
+import {Avatar, Button, List, Input} from "antd";
+import {fetchContacts} from "../slices/contact/contactApi";
+import {useDispatch} from "react-redux";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {selectContactList} from "../slices/contact/contactSlice";
 
-type ContactItem = {
-    id: string
-    name: string;
-    phone: string;
-    avatar: string;
-}
+const { Search } = Input
+
 
 const ContactsPage: FC = () => {
 
-    const [contactList, setContactList] = useState<ContactItem[]>([]);
+    const contactList = useTypedSelector(selectContactList);
+    const dispatch = useDispatch()
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    }
+
 
     useEffect(() => {
-        fetch(CONTACTS_URL)
-            .then(res => res.json())
-            .then(res => setContactList(res))
-    }, [])
+        dispatch(fetchContacts())
+    }, [dispatch])
 
     return (
         <div>
+            <Search placeholder="Поиск" onChange={handleChange} enterButton />
         <List
             bordered
             className="contactList"
             itemLayout="horizontal"
             dataSource={contactList}
             renderItem={item => (
-                <List.Item actions={[<a key="list-loadmore-edit">Изменить</a>, <a key="list-loadmore-more">Удалить</a>]}>
+                <List.Item actions={[<Button key="list-loadmore-edit">Изменить</Button>, <Button key="list-loadmore-more" danger>Удалить</Button>]}>
                     <List.Item.Meta
                         avatar={<Avatar src={item.avatar}/>}
                         title={item.name}
                         description={item.phone}
                     />
                 </List.Item>
-            )}
-        />
+            )}></List>
             <Button type="primary" className="addBtn">Новый контакт</Button>
         </div>
         );
