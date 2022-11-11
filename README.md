@@ -1,4 +1,4 @@
-[Ссылка на проект](https://test-takeoff-staff-7ntzltllq-ravelin9.vercel.app/)
+[Ссылка на проект](https://test-takeoff-staff.vercel.app/)
 
 Список контактов с авторизацией, возможностью редактировать, добавлять и удалять контакты.
 
