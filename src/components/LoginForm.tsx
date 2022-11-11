@@ -20,7 +20,7 @@ const LoginForm: FC = () => {
                 {error}
             </div>}
             <Form.Item
-                label="Имя пользователя"
+                label="Логин (user)"
                 name="username"
                 rules={[rules.required('Пожалуйста введите имя пользователя')]}
             >
@@ -30,7 +30,7 @@ const LoginForm: FC = () => {
                 />
             </Form.Item>
             <Form.Item
-                label="Пароль"
+                label="Пароль (123)"
                 name="password"
                 rules={[rules.required('Введите пароль')]}
             >
